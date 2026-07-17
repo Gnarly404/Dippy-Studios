@@ -22,10 +22,10 @@ export const CREATORS_COLLECTION = 'creators';
 // ---------------------------------------------------------------------------
 // From emailjs.com dashboard: Account > General (Public Key), Email Services
 // (Service ID), Email Templates (Template ID). See FIREBASE_SETUP.md.
-export const EMAILJS_PUBLIC_KEY = 'REPLACE_ME';
-export const EMAILJS_SERVICE_ID = 'REPLACE_ME';
-export const EMAILJS_CREATOR_TEMPLATE_ID = 'REPLACE_ME'; // new creator application
-export const EMAILJS_CONTACT_TEMPLATE_ID = 'REPLACE_ME'; // contact form inquiry
+export const EMAILJS_PUBLIC_KEY = 'Oo4izfPiCQW53Zawe';
+export const EMAILJS_SERVICE_ID = 'service_h54p865';
+export const EMAILJS_CREATOR_TEMPLATE_ID = 'template_6591ona'; // new creator application
+export const EMAILJS_CONTACT_TEMPLATE_ID = 'template_9k6314b'; // contact form inquiry
 
 // Email address that should receive notifications (used as a template
 // variable — set the "To email" in each EmailJS template to this same
