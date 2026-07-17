@@ -1,7 +1,7 @@
 // Central Firebase initializer. Uses the hosted modular SDK straight from
 // Google's CDN (gstatic) — no npm install / build step needed, matching the
 // rest of this static site.
-import { initializeApp } from 'https://www.gstatic.com/firebasejs/10.13.0/firebase-app.js';
+import { initializeApp } from 'https://www.gstatic.com/firebasejs/12.16.0/firebase-app.js';
 import {
   getFirestore,
   collection,
@@ -14,13 +14,13 @@ import {
   where,
   orderBy,
   serverTimestamp,
-} from 'https://www.gstatic.com/firebasejs/10.13.0/firebase-firestore.js';
+} from 'https://www.gstatic.com/firebasejs/12.16.0/firebase-firestore.js';
 import {
   getAuth,
   signInWithEmailAndPassword,
   onAuthStateChanged,
   signOut,
-} from 'https://www.gstatic.com/firebasejs/10.13.0/firebase-auth.js';
+} from 'https://www.gstatic.com/firebasejs/12.16.0/firebase-auth.js';
 
 import { FIREBASE_CONFIG } from './config.js';
 

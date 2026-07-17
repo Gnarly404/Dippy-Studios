@@ -5,12 +5,12 @@
 // setup and configuration > Config. See FIREBASE_SETUP.md for the full
 // walkthrough (free "Spark" plan is enough — no billing card required).
 export const FIREBASE_CONFIG = {
-  apiKey: 'REPLACE_ME',
-  authDomain: 'REPLACE_ME.firebaseapp.com',
-  projectId: 'REPLACE_ME',
-  storageBucket: 'REPLACE_ME.appspot.com',
-  messagingSenderId: 'REPLACE_ME',
-  appId: 'REPLACE_ME',
+  apiKey: 'AIzaSyC6Q8kVTnG_x2G_FKICDhzh_YLp-G1GzDY',
+  authDomain: 'dippy-studios.firebaseapp.com',
+  projectId: 'dippy-studios',
+  storageBucket: 'dippy-studios.firebasestorage.app',
+  messagingSenderId: '612995823560',
+  appId: '1:612995823560:web:673293d336ab3f70e7f2fd',
 };
 
 // Firestore collection that holds creator applications.
