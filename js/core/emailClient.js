@@ -31,10 +31,24 @@ export function isEmailConfigured() {
 async function send(templateId, templateParams) {
   if (!window.emailjs) throw new Error('EmailJS script did not load.');
   ensureInit();
-  return window.emailjs.send(EMAILJS_SERVICE_ID, templateId, {
-    to_email: NOTIFY_EMAIL,
-    ...templateParams,
-  });
+  try {
+    return await window.emailjs.send(EMAILJS_SERVICE_ID, templateId, {
+      to_email: NOTIFY_EMAIL,
+      ...templateParams,
+    });
+  } catch (err) {
+    // EmailJS rejects with a plain object like { status, text }, not a
+    // real Error, so err.message is normally undefined. Surface whatever
+    // it actually gave us instead.
+    const reason =
+      (err && err.text) ||
+      (err && err.message) ||
+      (err && err.status && `EmailJS error ${err.status}`) ||
+      (typeof err === 'string' ? err : null) ||
+      JSON.stringify(err);
+    console.error('EmailJS send failed:', err);
+    throw new Error(reason);
+  }
 }
 
 export function sendCreatorApplicationEmail(fields) {
