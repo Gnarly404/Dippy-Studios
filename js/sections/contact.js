@@ -79,7 +79,7 @@ export function initContactSection() {
     } catch (err) {
       setStatus(
         statusEl,
-        `We couldn\u2019t send that (${err.message}). Please try again, or email hello@dippystudios.com directly.`,
+        `We couldn\u2019t send that (${err.message}). Please try again, or email workwithgnarly@gmail.com directly.`,
         'error'
       );
       button.textContent = originalBtnText;
