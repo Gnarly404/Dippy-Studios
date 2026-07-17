@@ -18,6 +18,13 @@ const MAX_SOURCE_FILE_MB = 8;
 const MAX_OUTPUT_DIMENSION = 900;
 const OUTPUT_QUALITY = 0.82;
 
+function withTimeout(promise, ms, label) {
+  return Promise.race([
+    promise,
+    new Promise((_, reject) => setTimeout(() => reject(new Error(`${label} timed out`)), ms)),
+  ]);
+}
+
 function resizeImageToDataURL(file) {
   return new Promise((resolve, reject) => {
     const img = new Image();
@@ -160,34 +167,42 @@ export function initCreatorApplySection() {
     setStatus(statusEl, 'Sending your application\u2026', 'info');
 
     try {
-      await addDoc(collection(getDb(), CREATORS_COLLECTION), {
-        name,
-        email,
-        phone,
-        niche,
-        followers,
-        bio,
-        socials,
-        photo: resizedPhotoDataURL,
-        status: 'pending',
-        createdAt: serverTimestamp(),
-      });
+      await withTimeout(
+        addDoc(collection(getDb(), CREATORS_COLLECTION), {
+          name,
+          email,
+          phone,
+          niche,
+          followers,
+          bio,
+          socials,
+          photo: resizedPhotoDataURL,
+          status: 'pending',
+          createdAt: serverTimestamp(),
+        }),
+        15000,
+        'Saving your application'
+      );
 
       if (isEmailConfigured()) {
         try {
-          await sendCreatorApplicationEmail({
-            from_name: name,
-            from_email: email,
-            phone,
-            niche,
-            followers,
-            bio,
-            instagram: socials.instagram,
-            tiktok: socials.tiktok,
-            youtube: socials.youtube,
-            twitter: socials.twitter,
-            facebook: socials.facebook,
-          });
+          await withTimeout(
+            sendCreatorApplicationEmail({
+              from_name: name,
+              from_email: email,
+              phone,
+              niche,
+              followers,
+              bio,
+              instagram: socials.instagram,
+              tiktok: socials.tiktok,
+              youtube: socials.youtube,
+              twitter: socials.twitter,
+              facebook: socials.facebook,
+            }),
+            15000,
+            'Sending notification email'
+          );
         } catch (emailErr) {
           // The application is already saved in Firestore either way -- an
           // email hiccup shouldn't block the applicant from seeing success.

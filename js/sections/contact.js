@@ -1,6 +1,13 @@
 import { qs } from '../core/utilities.js';
 import { sendContactInquiryEmail, isEmailConfigured } from '../core/emailClient.js';
 
+function withTimeout(promise, ms, label) {
+  return Promise.race([
+    promise,
+    new Promise((_, reject) => setTimeout(() => reject(new Error(`${label} timed out`)), ms)),
+  ]);
+}
+
 function setStatus(statusEl, message, tone) {
   if (!statusEl) return;
   statusEl.textContent = message;
@@ -50,13 +57,17 @@ export function initContactSection() {
     setStatus(statusEl, 'Sending your message\u2026', 'info');
 
     try {
-      await sendContactInquiryEmail({
-        from_name: name,
-        from_email: email,
-        company: (data.get('company') || '').toString().trim(),
-        interest: (data.get('interest') || '').toString().trim(),
-        message,
-      });
+      await withTimeout(
+        sendContactInquiryEmail({
+          from_name: name,
+          from_email: email,
+          company: (data.get('company') || '').toString().trim(),
+          interest: (data.get('interest') || '').toString().trim(),
+          message,
+        }),
+        15000,
+        'Sending your message'
+      );
 
       form.reset();
       button.textContent = 'Message sent';
