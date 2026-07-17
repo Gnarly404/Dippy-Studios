@@ -1,0 +1,26 @@
+.particles {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  z-index: 0;
+}
+
+.particle {
+  position: absolute;
+  width: 3px; height: 3px;
+  border-radius: 50%;
+  background: var(--color-yellow);
+  opacity: 0.6;
+  animation: particleDrift 10s linear infinite;
+}
+
+@keyframes particleDrift {
+  from { transform: translateY(0); opacity: 0; }
+  10% { opacity: 0.6; }
+  90% { opacity: 0.6; }
+  to { transform: translateY(-120px); opacity: 0; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .particle { animation: none; opacity: 0; }
+}

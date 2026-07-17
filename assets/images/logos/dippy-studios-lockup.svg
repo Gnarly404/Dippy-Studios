@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 48" width="200" height="48">
+  <defs>
+    <linearGradient id="mark2" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#114C5A"/>
+      <stop offset="100%" stop-color="#172B36"/>
+    </linearGradient>
+  </defs>
+  <rect x="0" y="4" width="40" height="40" rx="12" fill="url(#mark2)"/>
+  <path d="M10 30 C10 20, 16 13, 23 13 C30 13, 33 19, 30 23 C27 27, 20 24, 20 30"
+        fill="none" stroke="#FFC801" stroke-width="3" stroke-linecap="round"/>
+  <circle cx="32" cy="12" r="2.6" fill="#FF9932"/>
+  <text x="50" y="31" font-family="'Space Grotesk', Arial, sans-serif" font-weight="700" font-size="21" fill="#172B36">Dippy<tspan fill="#FF9932">.</tspan>Studios</text>
+</svg>

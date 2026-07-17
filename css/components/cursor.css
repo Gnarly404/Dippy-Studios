@@ -1,0 +1,93 @@
+/*
+  Custom cursor — desktop/pointer-fine only.
+  Gated in JS via matchMedia('(hover: hover) and (pointer: fine)').
+  On touch devices the markup is never activated; native cursor/tap
+  affordances (see .btn:active, .card:active) carry the interaction instead.
+  This layer never sets pointer-events on interactive content and never
+  touches :focus-visible — keyboard focus styling lives in global.css.
+*/
+
+.cursor-dot,
+.cursor-ring {
+  position: fixed;
+  top: 0;
+  left: 0;
+  pointer-events: none;
+  z-index: 2000;
+  border-radius: 50%;
+  transform: translate(-50%, -50%);
+  will-change: transform;
+  opacity: 0;
+  transition: opacity 0.25s ease, width 0.35s var(--ease-out-expo), height 0.35s var(--ease-out-expo),
+    background 0.25s ease, border-color 0.25s ease;
+}
+
+html.has-custom-cursor .cursor-dot,
+html.has-custom-cursor .cursor-ring {
+  opacity: 1;
+}
+
+html.has-custom-cursor,
+html.has-custom-cursor a,
+html.has-custom-cursor button,
+html.has-custom-cursor [role="button"] {
+  cursor: none;
+}
+
+.cursor-dot {
+  width: 6px;
+  height: 6px;
+  background: var(--color-orange);
+}
+
+.cursor-ring {
+  width: 34px;
+  height: 34px;
+  border: 1px solid var(--color-dark-70);
+}
+
+.section--dark .cursor-ring,
+[data-cursor-theme="dark"] .cursor-ring {
+  border-color: rgba(241, 246, 244, 0.5);
+}
+
+/* Hover states, applied via data-cursor attribute on the ring */
+.cursor-ring[data-state="link"] {
+  width: 54px;
+  height: 54px;
+  background: var(--color-primary-10);
+  border-color: var(--color-primary);
+}
+
+.cursor-ring[data-state="media"] {
+  width: 84px;
+  height: 84px;
+  background: var(--color-dark);
+  border-color: transparent;
+}
+
+.cursor-ring[data-state="media"]::after {
+  content: 'View';
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--color-bg);
+  font-family: var(--font-mono);
+  font-size: 0.65rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.cursor-ring[data-state="logo"] {
+  width: 64px;
+  height: 64px;
+  background: var(--color-yellow);
+  border-color: transparent;
+}
+
+.cursor-dot[data-hidden="true"],
+.cursor-ring[data-hidden="true"] {
+  opacity: 0;
+}

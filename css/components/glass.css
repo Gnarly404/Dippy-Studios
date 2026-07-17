@@ -1,0 +1,18 @@
+.glass {
+  background: var(--glass-fill);
+  border: 1px solid var(--glass-border);
+  border-radius: var(--radius-lg);
+  backdrop-filter: blur(20px) saturate(160%);
+  -webkit-backdrop-filter: blur(20px) saturate(160%);
+  box-shadow: var(--shadow-glass);
+}
+
+.glass--dark {
+  background: var(--glass-fill-dark);
+  border-color: var(--glass-border-dark);
+  color: var(--color-bg);
+}
+
+.glass-panel {
+  padding: var(--space-lg);
+}

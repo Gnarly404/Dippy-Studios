@@ -1,0 +1,90 @@
+/*
+  Space Grotesk (Google Fonts) and General Sans (Fontshare) are loaded via
+  CDN <link> tags in each page's <head>.
+
+  To self-host instead, drop the woff2 files into assets/fonts/SpaceGrotesk/
+  and assets/fonts/GeneralSans/, remove the CDN <link> tags from the HTML,
+  and uncomment the two @font-face rules below.
+
+@font-face {
+  font-family: 'Space Grotesk';
+  src: url('../../assets/fonts/SpaceGrotesk/SpaceGrotesk-Variable.woff2') format('woff2');
+  font-weight: 300 700;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'General Sans';
+  src: url('../../assets/fonts/GeneralSans/GeneralSans-Variable.woff2') format('woff2');
+  font-weight: 300 700;
+  font-display: swap;
+}
+*/
+
+body {
+  font-family: var(--font-body);
+  font-size: var(--fs-body);
+  line-height: var(--lh-body);
+  color: var(--color-dark);
+  background: var(--color-bg);
+}
+
+h1, h2, h3, h4,
+.eyebrow, .display {
+  font-family: var(--font-display);
+  color: var(--color-dark);
+  letter-spacing: -0.02em;
+}
+
+h1 { font-size: var(--fs-h1); line-height: var(--lh-tight); font-weight: 600; }
+h2 { font-size: var(--fs-h2); line-height: var(--lh-tight); font-weight: 600; }
+h3 { font-size: var(--fs-h3); line-height: var(--lh-snug); font-weight: 600; }
+
+.hero-title {
+  font-family: var(--font-display);
+  font-size: var(--fs-hero);
+  line-height: 0.94;
+  font-weight: 600;
+  letter-spacing: -0.03em;
+  color: var(--color-dark);
+}
+
+.eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2xs);
+  font-size: var(--fs-eyebrow);
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.14em;
+  color: var(--color-primary);
+}
+
+.eyebrow::before {
+  content: '';
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--color-orange);
+}
+
+.lede {
+  font-size: var(--fs-body-lg);
+  line-height: var(--lh-body);
+  color: var(--color-dark-70);
+  max-width: 46ch;
+}
+
+.mono-label {
+  font-family: var(--font-mono);
+  font-size: var(--fs-small);
+  letter-spacing: 0.04em;
+  color: var(--color-primary);
+}
+
+/* Inside dark card overlays (case studies, creator cards) the default
+   teal mono-label sits on a near-black gradient at ~1.5:1 contrast —
+   switch it to a light tint so it's actually legible there. */
+.card__overlay .mono-label {
+  color: rgba(241, 246, 244, 0.85);
+}

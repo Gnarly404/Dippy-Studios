@@ -1,0 +1,20 @@
+.creators-hero { padding-top: calc(var(--space-3xl) + var(--space-lg)); }
+
+.creators-directory {
+  display: grid;
+  gap: var(--space-md);
+  grid-template-columns: repeat(2, 1fr);
+}
+
+@media (min-width: 768px) {
+  .creators-directory { grid-template-columns: repeat(4, 1fr); }
+}
+
+.apply-band {
+  background: var(--color-primary);
+  color: var(--color-bg);
+  border-radius: var(--radius-lg);
+  padding: var(--space-2xl) var(--space-lg);
+}
+
+.apply-band h2 { color: var(--color-bg); }

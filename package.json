@@ -1,0 +1,11 @@
+{
+  "name": "dippy-studios",
+  "version": "1.0.0",
+  "scripts": {
+    "trace-logos": "node scripts/trace-logos.js"
+  },
+  "devDependencies": {
+    "potrace": "^2.1.8",
+    "sharp": "^0.30.0"
+  }
+}

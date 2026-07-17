@@ -1,0 +1,131 @@
+.hero {
+  position: relative;
+  min-height: 100svh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding-top: calc(var(--space-3xl) + var(--space-lg));
+  overflow: hidden;
+}
+
+.hero__content {
+  position: relative;
+  z-index: 1;
+}
+
+/* Third depth layer: small accent shapes that read as "closer" to the
+   viewer than the ribbons/blobs, moving faster on scroll. Desktop only —
+   on mobile this whole layer is removed rather than shown static, since a
+   handful of small dots add nothing once parallax is gone. */
+.hero__accents {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+}
+
+.hero__accent {
+  position: absolute;
+  border-radius: 50%;
+  border: 1.5px solid var(--color-primary-20);
+}
+
+.hero__accent--1 { width: 64px; height: 64px; top: 22%; left: 12%; }
+.hero__accent--2 { width: 28px; height: 28px; top: 65%; left: 22%; background: var(--color-yellow); border: none; opacity: 0.7; }
+.hero__accent--3 { width: 40px; height: 40px; top: 38%; right: 16%; border-color: var(--color-orange); }
+
+@media (max-width: 959px) {
+  .hero__accents { display: none; }
+}
+
+.hero__meta {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: flex-end;
+  gap: var(--space-lg);
+  margin-top: var(--space-xl);
+}
+
+.hero__meta .lede { margin: 0; }
+
+.hero__scroll-cue {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2xs);
+  font-family: var(--font-mono);
+  font-size: var(--fs-small);
+  color: var(--color-primary);
+}
+
+.hero__scroll-cue::after {
+  content: '';
+  width: 1px; height: 40px;
+  background: var(--color-primary);
+  display: block;
+}
+
+/* Wall of Impact — the ribbon reel of client wins */
+.impact { padding-block: var(--space-lg); }
+
+/* Wall of Trust — logo grid, see components/logos.css */
+.trust .section__head { margin-bottom: var(--space-lg); }
+
+/* Services */
+.services-grid {
+  display: grid;
+  gap: var(--space-md);
+  grid-template-columns: 1fr;
+}
+
+@media (min-width: 768px) {
+  .services-grid { grid-template-columns: repeat(2, 1fr); }
+}
+@media (min-width: 1100px) {
+  .services-grid { grid-template-columns: repeat(3, 1fr); }
+}
+
+/* Creator network */
+.creators-grid {
+  display: grid;
+  gap: var(--space-md);
+  grid-template-columns: repeat(2, 1fr);
+}
+
+@media (min-width: 768px) {
+  .creators-grid { grid-template-columns: repeat(4, 1fr); }
+}
+
+/* Featured campaigns */
+.campaigns-grid {
+  display: grid;
+  gap: var(--space-md);
+  grid-template-columns: 1fr;
+}
+
+@media (min-width: 900px) {
+  .campaigns-grid { grid-template-columns: repeat(3, 1fr); }
+  .campaigns-grid > :first-child { grid-column: span 2; grid-row: span 2; }
+}
+
+/* Contact / CTA band */
+.cta-band {
+  border-radius: var(--radius-lg);
+  padding: var(--space-2xl) var(--space-lg);
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+}
+
+.cta-band h2 {
+  max-width: 20ch;
+  margin-inline: auto;
+}
+
+.cta-band__actions {
+  margin-top: var(--space-lg);
+  display: flex;
+  gap: var(--space-sm);
+  justify-content: center;
+  flex-wrap: wrap;
+}

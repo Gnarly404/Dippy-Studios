@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Review Applications — Dippy Studios (Internal)</title>
+<meta name="robots" content="noindex, nofollow">
+<link rel="icon" href="assets/images/logos/dippy-mark.png" type="image/png">
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/base/reset.css">
+<link rel="stylesheet" href="css/base/variables.css">
+<link rel="stylesheet" href="css/base/typography.css">
+<link rel="stylesheet" href="css/base/global.css">
+<link rel="stylesheet" href="css/components/buttons.css">
+<link rel="stylesheet" href="css/pages/admin.css">
+</head>
+<body class="admin-body">
+
+<div class="admin-shell">
+  <header class="admin-header">
+    <div>
+      <span class="eyebrow">Internal only</span>
+      <h1>Creator applications</h1>
+    </div>
+    <button type="button" class="btn btn--ghost btn--sm" data-signout-btn hidden>Sign out</button>
+  </header>
+
+  <section data-login-panel class="admin-card admin-login">
+    <h2>Sign in</h2>
+    <p class="lede">Use the admin account you created in Firebase Authentication.</p>
+    <form data-login-form>
+      <div class="form-field">
+        <label for="admin-email">Email</label>
+        <input type="email" id="admin-email" name="email" required autocomplete="username">
+      </div>
+      <div class="form-field">
+        <label for="admin-password">Password</label>
+        <input type="password" id="admin-password" name="password" required autocomplete="current-password">
+      </div>
+      <div class="form-status" data-login-status role="status" aria-live="polite" hidden></div>
+      <button type="submit" class="btn btn--primary">Sign in</button>
+    </form>
+  </section>
+
+  <section data-app-panel hidden>
+    <div class="admin-tabs">
+      <button type="button" class="admin-tab is-active" data-tab="pending">Pending</button>
+      <button type="button" class="admin-tab" data-tab="approved">Approved</button>
+      <button type="button" class="admin-tab" data-tab="rejected">Rejected</button>
+    </div>
+
+    <div class="form-status" data-list-status role="status" aria-live="polite" hidden></div>
+    <div class="admin-grid" data-applications-grid></div>
+  </section>
+</div>
+
+<script type="module" src="js/admin.js"></script>
+</body>
+</html>

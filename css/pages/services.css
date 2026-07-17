@@ -1,0 +1,30 @@
+.services-hero { padding-top: calc(var(--space-3xl) + var(--space-lg)); }
+
+.service-detail {
+  display: grid;
+  gap: var(--space-lg);
+  padding-block: var(--space-xl);
+  border-bottom: 1px solid var(--color-primary-10);
+}
+
+@media (min-width: 900px) {
+  .service-detail { grid-template-columns: 0.6fr 1fr; }
+}
+
+.service-detail__number {
+  font-family: var(--font-display);
+  font-size: 3rem;
+  color: var(--color-primary-20);
+}
+
+.service-detail__list {
+  display: grid;
+  gap: var(--space-2xs);
+  margin-top: var(--space-md);
+  font-size: var(--fs-small);
+}
+
+.service-detail__list li::before {
+  content: '\2192\0020';
+  color: var(--color-orange);
+}

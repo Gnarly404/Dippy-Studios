@@ -1,0 +1,28 @@
+.hover-lift {
+  transition: transform var(--dur-fast) var(--ease-out-quad);
+}
+.hover-lift:hover { transform: translateY(-4px); }
+
+.underline-sweep {
+  position: relative;
+  overflow: hidden;
+}
+
+.underline-sweep::after {
+  content: '';
+  position: absolute;
+  left: 0; bottom: 0;
+  height: 1px;
+  width: 100%;
+  background: currentColor;
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform var(--dur-mid) var(--ease-out-expo);
+}
+
+.underline-sweep:hover::after { transform: scaleX(1); }
+
+.tilt-on-hover {
+  transition: transform var(--dur-fast) var(--ease-out-quad);
+  transform-style: preserve-3d;
+}

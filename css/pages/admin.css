@@ -1,0 +1,114 @@
+.admin-body {
+  background: var(--color-bg);
+  min-height: 100vh;
+}
+
+.admin-shell {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: var(--space-lg) var(--container-pad) var(--space-3xl);
+}
+
+.admin-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  margin-bottom: var(--space-lg);
+  gap: var(--space-md);
+}
+
+.admin-card {
+  background: var(--color-white);
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow-glass);
+  padding: var(--space-lg);
+}
+
+.admin-login {
+  max-width: 420px;
+}
+
+.admin-login .form-field {
+  margin-bottom: var(--space-md);
+}
+
+.admin-login input {
+  width: 100%;
+  padding: var(--space-xs) var(--space-sm);
+  border-radius: var(--radius-sm);
+  border: 1px solid var(--color-primary-20);
+  font: inherit;
+}
+
+.admin-tabs {
+  display: flex;
+  gap: var(--space-2xs);
+  margin-bottom: var(--space-md);
+}
+
+.admin-tab {
+  padding: var(--space-2xs) var(--space-md);
+  border-radius: var(--radius-pill);
+  border: 1px solid var(--color-primary-20);
+  background: transparent;
+  font-family: var(--font-mono);
+  font-size: var(--fs-small);
+  cursor: pointer;
+}
+
+.admin-tab.is-active {
+  background: var(--color-primary);
+  color: var(--color-white);
+  border-color: var(--color-primary);
+}
+
+.admin-grid {
+  display: grid;
+  gap: var(--space-md);
+  grid-template-columns: 1fr;
+}
+
+@media (min-width: 720px) {
+  .admin-grid { grid-template-columns: 1fr 1fr; }
+}
+
+.admin-application {
+  display: flex;
+  gap: var(--space-sm);
+  align-items: flex-start;
+}
+
+.admin-application__photo {
+  width: 72px;
+  height: 72px;
+  border-radius: var(--radius-sm);
+  object-fit: cover;
+  flex-shrink: 0;
+}
+
+.admin-application__body h3 {
+  margin: 0 0 var(--space-3xs);
+}
+
+.admin-application__body p {
+  margin: 0 0 var(--space-3xs);
+}
+
+.admin-application__actions {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2xs);
+  margin-left: auto;
+}
+
+.form-status {
+  border-radius: var(--radius-sm);
+  padding: var(--space-xs) var(--space-sm);
+  margin-bottom: var(--space-md);
+  font-size: var(--fs-small);
+}
+
+.form-status[data-tone="error"] { background: rgba(200, 60, 60, 0.12); color: #a12f2f; }
+.form-status[data-tone="success"] { background: rgba(60, 160, 100, 0.12); color: #1f7a4d; }
+.form-status[data-tone="warn"] { background: rgba(255, 200, 1, 0.18); color: #6a5200; }
+.form-status[data-tone="info"] { background: var(--color-primary-10); color: var(--color-primary); }

@@ -1,0 +1,41 @@
+.gradient-blob {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(80px);
+  opacity: 0.5;
+  z-index: 0;
+  animation: floatBlob 18s var(--ease-out-quad) infinite alternate;
+}
+
+.gradient-blob--1 {
+  width: 480px; height: 480px;
+  background: var(--color-yellow);
+  top: -10%; right: -5%;
+}
+
+.gradient-blob--2 {
+  width: 380px; height: 380px;
+  background: var(--color-orange);
+  bottom: -15%; left: -8%;
+  animation-delay: -6s;
+}
+
+@keyframes floatBlob {
+  from { transform: translate(0, 0) scale(1); }
+  to { transform: translate(40px, -30px) scale(1.08); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .gradient-blob { animation: none; }
+}
+
+/* Mobile: collapse to a single, smaller, non-animated wash rather than the
+   full desktop depth stack (brief Phase 1: "define this explicitly"). */
+@media (max-width: 959px) {
+  .gradient-blob {
+    animation: none;
+    filter: blur(60px);
+    opacity: 0.35;
+  }
+  .gradient-blob--2 { display: none; }
+}

@@ -1,0 +1,19 @@
+.section__head {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: flex-end;
+  gap: var(--space-md);
+  margin-bottom: var(--space-xl);
+}
+
+.section__head h2 { max-width: 16ch; }
+
+.section__head .lede { max-width: 38ch; }
+
+.section-divider {
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--color-primary-20), transparent);
+  border: none;
+  margin-block: var(--space-2xl);
+}

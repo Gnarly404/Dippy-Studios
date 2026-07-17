@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Apply as a Creator — Dippy Studios</title>
+<meta name="description" content="Submit your profile to join the Dippy Studios creator network — add your photo, socials and niche.">
+
+
+<link rel="icon" href="assets/images/logos/dippy-mark.png" type="image/png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link href="https://api.fontshare.com/v2/css?f[]=general-sans@400,500,600,700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/base/reset.css">
+<link rel="stylesheet" href="css/base/variables.css">
+<link rel="stylesheet" href="css/base/typography.css">
+<link rel="stylesheet" href="css/base/global.css">
+<link rel="stylesheet" href="css/layout/navbar.css">
+<link rel="stylesheet" href="css/layout/footer.css">
+<link rel="stylesheet" href="css/layout/grid.css">
+<link rel="stylesheet" href="css/layout/sections.css">
+<link rel="stylesheet" href="css/components/buttons.css">
+<link rel="stylesheet" href="css/components/glass.css">
+<link rel="stylesheet" href="css/components/cursor.css">
+<link rel="stylesheet" href="css/animations/gsap.css">
+<link rel="stylesheet" href="css/animations/effects.css">
+<link rel="stylesheet" href="css/pages/contact.css">
+<link rel="stylesheet" href="css/pages/join.css">
+</head>
+<body>
+
+<nav class="navbar">
+  <a href="index.html" class="navbar__logo"><img src="assets/images/logos/dippy-studios-lockup.png" alt="Dippy Studios" height="28" class="navbar__logo-img" data-light-src="assets/images/logos/dippy-studios-lockup.png" data-dark-src="assets/images/logos/dippy-studios-lockup-white.png"></a>
+  <div class="navbar__links">
+    <a href="index.html">Home</a>
+    <a href="about.html">About</a>
+    <a href="services.html">Services</a>
+    <a href="work.html">Work</a>
+    <a href="creators.html">Creators</a>
+    <a href="insights.html">Insights</a>
+  </div>
+  <a href="contact.html" class="btn btn--primary btn--sm navbar__cta magnetic">Start a project</a>
+  <button class="navbar__toggle" aria-label="Toggle menu" aria-expanded="false">☰</button>
+</nav>
+
+<main>
+  <section class="section join-hero">
+    <div class="container">
+      <span class="eyebrow">Creator network</span>
+      <h1 data-split-text style="margin-top:1rem;">Apply as a creator.</h1>
+      <p class="lede" style="margin-top:1.5rem;">
+        Add your photo, socials and niche below. Our team reviews every application — if it's a fit,
+        we'll follow up by email about upcoming campaigns.
+      </p>
+    </div>
+  </section>
+
+  <section class="section section--tight">
+    <div class="container join-layout">
+      <form class="reveal join-form" data-creator-apply-form novalidate>
+
+        <div class="form-field">
+          <label>Profile photo</label>
+          <div class="photo-dropzone" data-photo-dropzone tabindex="0" role="button" aria-label="Upload a profile photo">
+            <img data-photo-preview alt="" hidden>
+            <div class="photo-dropzone__prompt">
+              <span>Click to upload, or drag an image here</span>
+              <span class="mono-label">JPG or PNG, up to 8MB</span>
+            </div>
+          </div>
+          <input type="file" accept="image/*" data-photo-input name="photo" hidden>
+        </div>
+
+        <div class="form-grid">
+          <div class="form-field">
+            <label for="name">Full name</label>
+            <input type="text" id="name" name="name" required autocomplete="name">
+          </div>
+          <div class="form-field">
+            <label for="email">Email</label>
+            <input type="email" id="email" name="email" required autocomplete="email">
+          </div>
+        </div>
+
+        <div class="form-grid">
+          <div class="form-field">
+            <label for="phone">Phone <span class="mono-label">(optional)</span></label>
+            <input type="tel" id="phone" name="phone" autocomplete="tel">
+          </div>
+          <div class="form-field">
+            <label for="niche">Primary niche</label>
+            <select id="niche" name="niche">
+              <option>Lifestyle</option>
+              <option>Comedy</option>
+              <option>Beauty</option>
+              <option>Tech</option>
+              <option>Fashion</option>
+              <option>Food</option>
+              <option>Fitness</option>
+              <option>Gaming</option>
+              <option>Music</option>
+              <option>Education</option>
+              <option>Other</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="form-field">
+          <label for="followers">Total followers across platforms</label>
+          <input type="text" id="followers" name="followers" placeholder="e.g. 120K">
+        </div>
+
+        <div class="form-field">
+          <label for="bio">Tell us about your content</label>
+          <textarea id="bio" name="bio" rows="4" required placeholder="What you create, your audience, and any past brand work"></textarea>
+        </div>
+
+        <div class="section__head" style="margin-top: var(--space-lg);">
+          <div>
+            <span class="eyebrow">Social platforms</span>
+            <p class="mono-label" style="margin-top: 0.4rem;">Add a link or handle for at least one platform</p>
+          </div>
+        </div>
+
+        <div class="form-grid form-grid--socials">
+          <div class="form-field">
+            <label for="instagram">Instagram</label>
+            <input type="text" id="instagram" name="instagram" placeholder="@handle or profile link">
+          </div>
+          <div class="form-field">
+            <label for="tiktok">TikTok</label>
+            <input type="text" id="tiktok" name="tiktok" placeholder="@handle or profile link">
+          </div>
+          <div class="form-field">
+            <label for="youtube">YouTube</label>
+            <input type="text" id="youtube" name="youtube" placeholder="Channel link">
+          </div>
+          <div class="form-field">
+            <label for="twitter">X / Twitter</label>
+            <input type="text" id="twitter" name="twitter" placeholder="@handle or profile link">
+          </div>
+          <div class="form-field">
+            <label for="facebook">Facebook</label>
+            <input type="text" id="facebook" name="facebook" placeholder="Page link">
+          </div>
+        </div>
+
+        <div class="form-status" data-form-status role="status" aria-live="polite" hidden></div>
+
+        <button type="submit" class="btn btn--primary magnetic">Submit application</button>
+      </form>
+
+      <aside class="glass glass-panel contact-info-card reveal">
+        <h3>What happens after you apply</h3>
+        <dl class="contact-info-list">
+          <div>
+            <dt>Review</dt>
+            <dd>Our team checks every application against current campaign needs.</dd>
+          </div>
+          <div>
+            <dt>Response time</dt>
+            <dd>We follow up by email if there's a fit, usually within a couple of weeks.</dd>
+          </div>
+          <div>
+            <dt>Questions</dt>
+            <dd><a href="mailto:hello@dippystudios.com">hello@dippystudios.com</a></dd>
+          </div>
+        </dl>
+      </aside>
+    </div>
+  </section>
+</main>
+
+<footer class="footer">
+  <div class="container">
+    <div class="footer__top">
+      <div class="footer__brand">
+        <a href="index.html" class="navbar__logo"><img src="assets/images/logos/dippy-studios-lockup-white.png" alt="Dippy Studios" height="28"></a>
+        <p class="footer__tagline">Africa's creator economy company — connecting brands, creators, media and technology.</p>
+      </div>
+      <div class="footer__col">
+        <h4>Company</h4>
+        <a href="about.html">About</a>
+        <a href="work.html">Work</a>
+        <a href="insights.html">Insights</a>
+      </div>
+      <div class="footer__col">
+        <h4>Services</h4>
+        <a href="services.html">Influencer Marketing</a>
+        <a href="services.html">Creator Management</a>
+        <a href="services.html">Creative Production</a>
+      </div>
+      <div class="footer__col">
+        <h4>Get in touch</h4>
+        <a href="contact.html">Contact</a>
+        <a href="join.html">Apply as a creator</a>
+      </div>
+    </div>
+    <div class="footer__bottom">
+      <span>© <span data-current-year>2026</span> Dippy Studios. Nairobi/ Eldoret, Kenya.</span>
+      <div class="footer__social">
+        <a href="https://www.youtube.com/@dippystudios" aria-label="Youtube">Youtube</a>
+        <a href="https://www.tiktok.com/@dippystudios" aria-label="TikTok">TikTok</a>
+        <a href="https://www.facebook.com/profile.php?id=100095184163909" aria-label="Facebook">Facebook</a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+<script src="https://unpkg.com/lenis@1.1.13/dist/lenis.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+<script type="module" src="js/app.js"></script>
+</body>
+</html>

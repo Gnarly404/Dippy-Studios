@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Dippy Studios — Building Africa's Leading Creator Economy Company</title>
+<meta name="description" content="Dippy Studios connects brands, creators, media and technology through influencer marketing, creator management and world-class production.">
+
+
+<link rel="icon" href="assets/images/logos/dippy-mark.png" type="image/png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link href="https://api.fontshare.com/v2/css?f[]=general-sans@400,500,600,700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/base/reset.css">
+<link rel="stylesheet" href="css/base/variables.css">
+<link rel="stylesheet" href="css/base/typography.css">
+<link rel="stylesheet" href="css/base/global.css">
+<link rel="stylesheet" href="css/layout/navbar.css">
+<link rel="stylesheet" href="css/layout/footer.css">
+<link rel="stylesheet" href="css/layout/grid.css">
+<link rel="stylesheet" href="css/layout/sections.css">
+<link rel="stylesheet" href="css/components/buttons.css">
+<link rel="stylesheet" href="css/components/glass.css">
+<link rel="stylesheet" href="css/components/cards.css">
+<link rel="stylesheet" href="css/components/logos.css">
+<link rel="stylesheet" href="css/components/testimonials.css">
+<link rel="stylesheet" href="css/components/cursor.css">
+<link rel="stylesheet" href="css/components/loader.css">
+<link rel="stylesheet" href="css/components/ribbons.css">
+<link rel="stylesheet" href="css/components/slider.css">
+<link rel="stylesheet" href="css/animations/gsap.css">
+<link rel="stylesheet" href="css/animations/gradients.css">
+<link rel="stylesheet" href="css/animations/particles.css">
+<link rel="stylesheet" href="css/animations/effects.css">
+<link rel="stylesheet" href="css/pages/home.css">
+</head>
+<body>
+
+<div class="loader" aria-hidden="true">
+  <div class="loader__word">D</div>
+  <div class="loader__bar"><span></span></div>
+  <div class="loader__count">0%</div>
+  <p class="loader__caption">once, we just made you laugh. now we build the people who do.</p>
+  <span class="loader__skip">Tap or Esc to skip</span>
+</div>
+
+<nav class="navbar">
+  <a href="index.html" class="navbar__logo"><img src="assets/images/logos/dippy-studios-lockup.png" alt="Dippy Studios" height="28" class="navbar__logo-img" data-light-src="assets/images/logos/dippy-studios-lockup.png" data-dark-src="assets/images/logos/dippy-studios-lockup-white.png"></a>
+  <div class="navbar__links">
+    <a href="index.html" aria-current="page">Home</a>
+    <a href="about.html">About</a>
+    <a href="services.html">Services</a>
+    <a href="work.html">Work</a>
+    <a href="creators.html">Creators</a>
+    <a href="insights.html">Insights</a>
+  </div>
+  <a href="contact.html" class="btn btn--primary btn--sm navbar__cta magnetic">Start a project</a>
+  <button class="navbar__toggle" aria-label="Toggle menu" aria-expanded="false">☰</button>
+</nav>
+
+<main>
+
+  <!-- HERO -->
+  <section class="hero">
+    <div class="ribbon-field" aria-hidden="true">
+      <svg viewBox="0 0 1200 800" preserveAspectRatio="none">
+        <path class="ribbon-path ribbon-path--1 ribbon-dash" d="M -100 200 C 300 100, 500 400, 1300 250" />
+        <path class="ribbon-path ribbon-path--2 ribbon-dash" d="M -100 450 C 350 550, 600 250, 1300 480" />
+        <path class="ribbon-path ribbon-path--3 ribbon-dash" d="M -100 650 C 400 700, 700 500, 1300 680" />
+      </svg>
+    </div>
+    <div class="gradient-blob gradient-blob--1" aria-hidden="true"></div>
+    <div class="gradient-blob gradient-blob--2" aria-hidden="true"></div>
+
+    <div class="hero__accents" aria-hidden="true">
+      <span class="hero__accent hero__accent--1"></span>
+      <span class="hero__accent hero__accent--2"></span>
+      <span class="hero__accent hero__accent--3"></span>
+    </div>
+
+    <div class="container hero__content">
+      <span class="eyebrow">East Africa's Creator Economy Company</span>
+      <h1 class="hero-title" data-split-text style="margin-top: 1rem;">
+        Brands, creators & culture — built as one ecosystem.
+      </h1>
+
+      <div class="hero__meta">
+        <p class="lede">
+          We connect ambitious brands with authentic creators through strategy, storytelling,
+          production and campaigns you can measure.
+        </p>
+        <div class="hero__scroll-cue" role="button" tabindex="0">Scroll</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- WALL OF TRUST -->
+  <section class="section trust">
+    <div class="container">
+      <div class="section__head">
+        <div>
+          <span class="eyebrow">Trusted by</span>
+          <h2>Brands we've built with</h2>
+        </div>
+        <p class="lede">A working list of the companies Dippy Studios has partnered with across marketplaces, fintech, betting, retail and real estate.</p>
+      </div>
+      <div class="logo-wall" data-logo-wall>
+        <!-- populated by js/sections/brands.js from data/brands.json -->
+      </div>
+    </div>
+  </section>
+
+  <hr class="section-divider">
+
+  <!-- SERVICES -->
+  <section class="section" id="services">
+    <div class="container">
+      <div class="section__head">
+        <div>
+          <span class="eyebrow">What we do</span>
+          <h2>A full-stack creator economy studio</h2>
+        </div>
+        <a href="services.html" class="btn btn--ghost btn--sm magnetic">See all services →</a>
+      </div>
+      <div class="services-grid" data-services-grid>
+        <!-- populated by js/sections/services.js -->
+      </div>
+    </div>
+  </section>
+
+  <!-- CREATOR NETWORK -->
+  <section class="section section--dark" data-theme="dark">
+    <div class="particles" aria-hidden="true"></div>
+    <div class="container">
+      <div class="section__head">
+        <div>
+          <span class="eyebrow">Creator network</span>
+          <h2>The faces behind the campaigns</h2>
+        </div>
+        <a href="creators.html" class="btn btn--accent btn--sm magnetic">Meet the creators →</a>
+      </div>
+      <div class="creators-grid" data-creators-grid>
+        <!-- populated by js/sections/creators.js -->
+      </div>
+    </div>
+  </section>
+
+  <!-- FEATURED CAMPAIGNS -->
+  <section class="section">
+    <div class="container">
+      <div class="section__head">
+        <div>
+          <span class="eyebrow">Featured work</span>
+          <h2>Campaigns that moved the needle</h2>
+        </div>
+        <a href="work.html" class="btn btn--ghost btn--sm magnetic">View all work →</a>
+      </div>
+      <div class="campaigns-grid" data-campaigns-grid>
+        <!-- populated by js/sections/portfolio.js -->
+      </div>
+    </div>
+  </section>
+
+  <hr class="section-divider">
+
+  <!-- TESTIMONIALS -->
+  <section class="section">
+    <div class="container">
+      <div class="section__head">
+        <div>
+          <span class="eyebrow">Client voices</span>
+          <h2>What partners say</h2>
+        </div>
+      </div>
+      <div class="testimonials-track" data-testimonials-track>
+        <!-- populated by js/sections/testimonials.js -->
+      </div>
+      <div class="testimonials-nav">
+        <button class="btn btn--icon-circle" data-testimonials-prev aria-label="Previous">←</button>
+        <button class="btn btn--icon-circle" data-testimonials-next aria-label="Next">→</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- CONTACT CTA -->
+  <section class="section">
+    <div class="container">
+      <div class="cta-band glass" style="background: var(--color-primary); color: var(--color-bg);">
+        <h2 style="color: var(--color-bg);">Ready to build something creators and audiences actually care about?</h2>
+        <div class="cta-band__actions">
+          <a href="contact.html" class="btn btn--accent magnetic">Start a project</a>
+          <a href="creators.html" class="btn btn--ghost magnetic" style="border-color: rgba(241,246,244,0.4); color: var(--color-bg);">Join as a creator</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer class="footer">
+  <div class="container">
+    <div class="footer__top">
+      <div class="footer__brand">
+        <a href="index.html" class="navbar__logo"><img src="assets/images/logos/dippy-studios-lockup-white.png" alt="Dippy Studios" height="28"></a>
+        <p class="footer__tagline">Africa's creator economy company — connecting brands, creators, media and technology.</p>
+      </div>
+      <div class="footer__col">
+        <h4>Company</h4>
+        <a href="about.html">About</a>
+        <a href="work.html">Work</a>
+        <a href="insights.html">Insights</a>
+      </div>
+      <div class="footer__col">
+        <h4>Services</h4>
+        <a href="services.html">Influencer Marketing</a>
+        <a href="services.html">Creator Management</a>
+        <a href="services.html">Creative Production</a>
+      </div>
+      <div class="footer__col">
+        <h4>Get in touch</h4>
+        <a href="contact.html">Contact</a>
+        <a href="creators.html">Apply as a creator</a>
+      </div>
+    </div>
+    <div class="footer__bottom">
+      <span>© <span data-current-year>2026</span> Dippy Studios. Nairobi/ Eldoret, Kenya.</span>
+      <div class="footer__social">
+        <a href="https://www.youtube.com/@dippystudios" aria-label="Youtube">Youtube</a>
+        <a href="https://www.tiktok.com/@dippystudios" aria-label="TikTok">TikTok</a>
+        <a href="https://www.facebook.com/profile.php?id=100095184163909" aria-label="Facebook">Facebook</a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+<script src="https://unpkg.com/lenis@1.1.13/dist/lenis.min.js"></script>
+<script type="module" src="js/app.js"></script>
+</body>
+</html>

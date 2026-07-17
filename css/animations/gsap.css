@@ -1,0 +1,20 @@
+[data-split-text] .line {
+  overflow: hidden;
+  display: inline-block;
+  vertical-align: top;
+}
+
+[data-split-text] .line span {
+  display: inline-block;
+  will-change: transform;
+}
+
+[data-fade-up] {
+  will-change: transform, opacity;
+}
+
+[data-pin-section] {
+  will-change: transform;
+}
+
+.gsap-hidden { visibility: hidden; }

@@ -1,0 +1,56 @@
+.contact-hero { padding-top: calc(var(--space-3xl) + var(--space-lg)); }
+
+.contact-layout {
+  display: grid;
+  gap: var(--space-xl);
+}
+
+@media (min-width: 900px) {
+  .contact-layout { grid-template-columns: 1fr 1fr; }
+}
+
+.form-field {
+  display: grid;
+  gap: var(--space-2xs);
+  margin-bottom: var(--space-md);
+}
+
+.form-field label {
+  font-size: var(--fs-small);
+  font-weight: 600;
+}
+
+.form-field input,
+.form-field textarea,
+.form-field select {
+  padding: 0.9rem 1.1rem;
+  border-radius: var(--radius-sm);
+  border: 1.5px solid var(--color-primary-20);
+  background: var(--color-white);
+  font-family: var(--font-body);
+}
+
+.form-field input:focus,
+.form-field textarea:focus,
+.form-field select:focus {
+  border-color: var(--color-primary);
+}
+
+.contact-info-card {
+  border-radius: var(--radius-lg);
+}
+
+.contact-info-list {
+  display: grid;
+  gap: var(--space-md);
+  margin-top: var(--space-lg);
+}
+
+.contact-info-list dt {
+  font-size: var(--fs-eyebrow);
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--color-orange);
+}
+
+.contact-info-list dd { font-size: var(--fs-body); margin-top: 0.2rem; }

@@ -1,0 +1,104 @@
+.navbar {
+  position: fixed;
+  top: var(--space-md);
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 100;
+  width: min(calc(100% - 2.5rem), 1200px);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0.6rem 0.6rem 0.6rem 1.5rem;
+  background: var(--glass-fill);
+  border: 1px solid var(--glass-border);
+  border-radius: var(--radius-pill);
+  backdrop-filter: blur(18px) saturate(160%);
+  -webkit-backdrop-filter: blur(18px) saturate(160%);
+  box-shadow: var(--shadow-glass);
+  opacity: 0.92;
+  transition: background var(--dur-mid) var(--ease-out-quad), padding var(--dur-mid) var(--ease-out-quad),
+    opacity var(--dur-mid) var(--ease-out-quad), box-shadow var(--dur-mid) var(--ease-out-quad);
+}
+
+.navbar.is-scrolled {
+  padding-block: 0.45rem;
+  opacity: 1;
+}
+
+/* Deeper scroll: nav condenses further and the logo scales down slightly,
+   signalling "you're well into the page" without adding a third color scheme. */
+.navbar.is-condensed {
+  padding: 0.4rem 0.4rem 0.4rem 1.1rem;
+  box-shadow: 0 12px 40px -18px rgba(23, 43, 54, 0.35);
+}
+
+.navbar.is-condensed .navbar__logo img {
+  transform: scale(0.86);
+}
+
+.navbar__logo {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 1.15rem;
+  letter-spacing: -0.01em;
+  color: var(--color-dark);
+  display: flex;
+  align-items: center;
+  gap: var(--space-2xs);
+}
+
+.navbar__logo img {
+  transition: transform var(--dur-mid) var(--ease-out-expo);
+}
+
+.navbar__logo span {
+  color: var(--color-orange);
+}
+
+.navbar__links {
+  display: none;
+  align-items: center;
+  gap: var(--space-lg);
+}
+
+.navbar__links a {
+  position: relative;
+  font-size: var(--fs-small);
+  font-weight: 500;
+  color: var(--color-dark);
+}
+
+.navbar__links a::after {
+  content: '';
+  position: absolute;
+  left: 0; right: 0; bottom: -6px;
+  height: 2px;
+  background: var(--color-orange);
+  transform: scaleX(0);
+  transform-origin: right;
+  transition: transform var(--dur-fast) var(--ease-out-quad);
+}
+
+.navbar__links a:hover::after,
+.navbar__links a[aria-current="page"]::after {
+  transform: scaleX(1);
+  transform-origin: left;
+}
+
+.navbar__cta {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2xs);
+}
+
+.navbar__toggle {
+  display: inline-flex;
+  width: 40px; height: 40px;
+  align-items: center;
+  justify-content: center;
+}
+
+@media (min-width: 960px) {
+  .navbar__links { display: flex; }
+  .navbar__toggle { display: none; }
+}
