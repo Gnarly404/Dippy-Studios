@@ -30,4 +30,4 @@ export const EMAILJS_CONTACT_TEMPLATE_ID = 'template_9k6314b'; // contact form i
 // Email address that should receive notifications (used as a template
 // variable — set the "To email" in each EmailJS template to this same
 // address, or hardcode it there instead).
-export const NOTIFY_EMAIL = 'hello@dippystudios.com';
+export const NOTIFY_EMAIL = 'workwithgnarly@gmail.com';
