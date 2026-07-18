@@ -56,6 +56,24 @@
   font-family: var(--font-mono);
   font-size: var(--fs-small);
   color: var(--color-primary);
+  cursor: pointer;
+  opacity: 1;
+  transition: opacity var(--dur-mid) var(--ease-out-quad);
+  animation: scroll-cue-float 2.6s ease-in-out infinite;
+}
+
+.hero__scroll-cue.is-hidden {
+  opacity: 0;
+  pointer-events: none;
+}
+
+@keyframes scroll-cue-float {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(6px); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .hero__scroll-cue { animation: none; }
 }
 
 .hero__scroll-cue::after {

@@ -14,6 +14,7 @@ import { initRibbons } from './gsap/ribbons.js';
 import { initParallax } from './gsap/parallax.js';
 import { initImageReveals } from './gsap/imageAnimations.js';
 import { initPageTransitions } from './gsap/pageTransitions.js';
+import { initCardTilt } from './core/cardTilt.js';
 
 import { initHeroSection } from './sections/hero.js';
 import { initServicesSection } from './sections/services.js';
@@ -55,6 +56,7 @@ async function main() {
   initParallax();
   initImageReveals();
   initPageTransitions();
+  initCardTilt();
 
   await initLoader();
   playIntro();
