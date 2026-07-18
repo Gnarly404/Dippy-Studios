@@ -30,6 +30,11 @@
 
 .section--tight { padding-block: var(--space-2xl); }
 
+@media (max-width: 640px) {
+  .section { padding-block: var(--space-xl); }
+  .section--tight { padding-block: var(--space-lg); }
+}
+
 .section--dark {
   background: var(--color-dark);
   color: var(--color-bg);

@@ -102,3 +102,23 @@
   .navbar__links { display: flex; }
   .navbar__toggle { display: none; }
 }
+
+@media (max-width: 959px) {
+  .navbar__links.is-open {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: var(--space-sm);
+    position: absolute;
+    top: calc(100% + 0.6rem);
+    left: 0;
+    right: 0;
+    padding: var(--space-md) var(--space-lg);
+    background: var(--glass-fill);
+    border: 1px solid var(--glass-border);
+    border-radius: var(--radius-md);
+    backdrop-filter: blur(18px) saturate(160%);
+    -webkit-backdrop-filter: blur(18px) saturate(160%);
+    box-shadow: var(--shadow-glass);
+  }
+}
