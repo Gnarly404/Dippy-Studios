@@ -3,6 +3,7 @@ import {
   getDb,
   getAuthInstance,
   collection,
+  addDoc,
   getDocs,
   doc,
   updateDoc,
@@ -10,6 +11,7 @@ import {
   query,
   where,
   orderBy,
+  serverTimestamp,
   signInWithEmailAndPassword,
   onAuthStateChanged,
   signOut,
@@ -108,6 +110,49 @@ function bindGridActions() {
   });
 }
 
+async function importSeedCreators() {
+  const btn = qs('[data-import-seed-btn]');
+  btn.disabled = true;
+  const originalText = btn.textContent;
+  btn.textContent = 'Importing…';
+
+  try {
+    const seed = await fetch('data/creators.json').then((r) => r.json());
+
+    // Skip any that are already imported (checked by name, tagged source: 'seed').
+    const existingSnap = await getDocs(
+      query(collection(getDb(), CREATORS_COLLECTION), where('source', '==', 'seed'))
+    );
+    const alreadyImported = new Set(existingSnap.docs.map((d) => d.data().name));
+
+    let count = 0;
+    for (const c of seed) {
+      if (alreadyImported.has(c.name)) continue;
+      await addDoc(collection(getDb(), CREATORS_COLLECTION), {
+        name: c.name,
+        niche: c.niche,
+        followers: c.followers,
+        photo: c.photo,
+        email: '',
+        phone: '',
+        bio: '',
+        socials: {},
+        status: 'approved',
+        source: 'seed',
+        createdAt: serverTimestamp(),
+      });
+      count += 1;
+    }
+
+    btn.textContent = count > 0 ? `Imported ${count}` : 'Already imported';
+    if (currentTab === 'approved') loadApplications();
+  } catch (err) {
+    alert(`Import failed: ${err.message}`);
+    btn.textContent = originalText;
+    btn.disabled = false;
+  }
+}
+
 function bindTabs() {
   qsa('.admin-tab').forEach((tab) => {
     tab.addEventListener('click', () => {
@@ -163,3 +208,4 @@ function initAuth() {
 initAuth();
 bindTabs();
 bindGridActions();
+qs('[data-import-seed-btn]').addEventListener('click', importSeedCreators);

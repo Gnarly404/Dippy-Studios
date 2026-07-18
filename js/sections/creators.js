@@ -51,7 +51,13 @@ export async function initCreatorsSection() {
     fetchApprovedFromFirestore(),
   ]);
 
-  let creators = [...(jsonCreators || []), ...firestoreCreators];
+  // Firestore is the source of truth once a creator has been imported/approved
+  // there, so drop any static JSON entry with a matching name to avoid
+  // showing the same creator twice.
+  const firestoreNames = new Set(firestoreCreators.map((c) => c.name));
+  const dedupedJson = (jsonCreators || []).filter((c) => !firestoreNames.has(c.name));
+
+  let creators = [...dedupedJson, ...firestoreCreators];
   if (!creators.length) creators = FALLBACK;
 
   grid.innerHTML = creators
