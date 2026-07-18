@@ -101,6 +101,43 @@
   margin-left: auto;
 }
 
+.admin-application--editing {
+  flex-direction: column;
+  align-items: stretch;
+}
+
+.admin-edit-form {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2xs);
+}
+
+.admin-edit-form label {
+  display: flex;
+  flex-direction: column;
+  gap: 0.2rem;
+  font-size: var(--fs-small);
+  font-family: var(--font-mono);
+}
+
+.admin-edit-form input[type="text"],
+.admin-edit-form textarea {
+  padding: var(--space-2xs) var(--space-xs);
+  border-radius: var(--radius-sm);
+  border: 1px solid var(--color-primary-20);
+  font: inherit;
+  font-family: var(--font-base);
+}
+
+.admin-edit-form textarea {
+  min-height: 4.5em;
+  resize: vertical;
+}
+
+.admin-edit-form .admin-application__photo {
+  align-self: flex-start;
+}
+
 .form-status {
   border-radius: var(--radius-sm);
   padding: var(--space-xs) var(--space-sm);
