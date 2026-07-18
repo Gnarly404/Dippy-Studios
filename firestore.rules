@@ -9,12 +9,15 @@ service cloud.firestore {
 
       // Anyone can submit a new application from join.html (public form),
       // but only as a brand-new "pending" doc — they can't set themselves
-      // to "approved" or edit/delete existing applications.
-      allow create: if request.resource.data.status == 'pending'
-                    && request.resource.data.name is string
-                    && request.resource.data.name.size() > 0
-                    && request.resource.data.email is string
-                    && request.resource.data.bio is string;
+      // to "approved" or edit/delete existing applications. A signed-in
+      // admin can also create a document directly with any status (used
+      // by the admin.html "import starter creators" button).
+      allow create: if request.auth != null
+                    || (request.resource.data.status == 'pending'
+                        && request.resource.data.name is string
+                        && request.resource.data.name.size() > 0
+                        && request.resource.data.email is string
+                        && request.resource.data.bio is string);
 
       // Anyone can read approved creators (creators.html public directory).
       allow read: if resource.data.status == 'approved';
