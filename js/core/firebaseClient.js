@@ -31,7 +31,11 @@ let auth;
 function ensureInit() {
   if (!app) {
     app = initializeApp(FIREBASE_CONFIG);
-    db = getFirestore(app);
+    // This project's Firestore database was created with the custom ID
+    // "dippy-studios" rather than being left as "(default)" — pass it
+    // explicitly, since getFirestore(app) with no second argument only
+    // ever looks for a database literally named "(default)".
+    db = getFirestore(app, 'dippy-studios');
     auth = getAuth(app);
   }
   return { app, db, auth };
