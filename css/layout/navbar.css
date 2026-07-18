@@ -17,7 +17,8 @@
   box-shadow: var(--shadow-glass);
   opacity: 0.92;
   transition: background var(--dur-mid) var(--ease-out-quad), padding var(--dur-mid) var(--ease-out-quad),
-    opacity var(--dur-mid) var(--ease-out-quad), box-shadow var(--dur-mid) var(--ease-out-quad);
+    opacity var(--dur-mid) var(--ease-out-quad), box-shadow var(--dur-mid) var(--ease-out-quad),
+    border-radius var(--dur-mid) var(--ease-out-quad);
 }
 
 .navbar.is-scrolled {
@@ -34,6 +35,13 @@
 
 .navbar.is-condensed .navbar__logo img {
   transform: scale(0.86);
+}
+
+/* When the mobile panel is open, square off the bottom corners of the pill
+   so it reads as one continuous surface with the panel below it. */
+.navbar:has(.navbar__links.is-open) {
+  border-bottom-left-radius: var(--radius-md);
+  border-bottom-right-radius: var(--radius-md);
 }
 
 .navbar__logo {
@@ -66,24 +74,32 @@
   font-size: var(--fs-small);
   font-weight: 500;
   color: var(--color-dark);
+  padding: 0.35rem 0.1rem;
+  transition: color var(--dur-fast) var(--ease-out-quad), transform var(--dur-fast) var(--ease-out-quad);
 }
 
-.navbar__links a::after {
-  content: '';
+.navbar__links a:hover {
+  transform: translateY(-1px);
+  color: var(--color-orange);
+}
+
+/* Desktop active/hover indicator: a sliding translucent pill positioned by
+   JS (navigation.js) to match whichever link is active or hovered, rather
+   than a plain underline. Falls back to nothing if JS hasn't run yet. */
+.navbar__pill {
   position: absolute;
-  left: 0; right: 0; bottom: -6px;
-  height: 2px;
-  background: var(--color-orange);
-  transform: scaleX(0);
-  transform-origin: right;
-  transition: transform var(--dur-fast) var(--ease-out-quad);
+  top: 0; left: 0;
+  height: 100%;
+  width: 0;
+  border-radius: var(--radius-pill);
+  background: var(--color-primary-10);
+  pointer-events: none;
+  z-index: -1;
+  opacity: 0;
+  transition: opacity var(--dur-fast) ease;
 }
 
-.navbar__links a:hover::after,
-.navbar__links a[aria-current="page"]::after {
-  transform: scaleX(1);
-  transform-origin: left;
-}
+.navbar__pill.is-visible { opacity: 1; }
 
 .navbar__cta {
   display: inline-flex;
@@ -91,11 +107,49 @@
   gap: var(--space-2xs);
 }
 
+.navbar__cta--mobile { display: none; }
+
+.navbar__mobile-divider { display: none; }
+
 .navbar__toggle {
   display: inline-flex;
-  width: 40px; height: 40px;
+  flex-direction: column;
   align-items: center;
   justify-content: center;
+  gap: 5px;
+  width: 40px; height: 40px;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  position: relative;
+  z-index: 101;
+}
+
+.navbar__toggle:focus-visible {
+  outline: 2px solid var(--color-orange);
+  outline-offset: 2px;
+  border-radius: var(--radius-sm);
+}
+
+.navbar__toggle-line {
+  display: block;
+  width: 20px;
+  height: 2px;
+  border-radius: 2px;
+  background: var(--color-dark);
+  transition: transform 0.35s var(--ease-out-expo), opacity 0.2s ease;
+  transform-origin: center;
+}
+
+.navbar__toggle.is-active .navbar__toggle-line:nth-child(1) {
+  transform: translateY(7px) rotate(45deg);
+}
+.navbar__toggle.is-active .navbar__toggle-line:nth-child(2) {
+  opacity: 0;
+  transform: scaleX(0);
+}
+.navbar__toggle.is-active .navbar__toggle-line:nth-child(3) {
+  transform: translateY(-7px) rotate(-45deg);
 }
 
 @media (min-width: 960px) {
@@ -107,10 +161,10 @@
   .navbar__links.is-open {
     display: flex;
     flex-direction: column;
-    align-items: flex-start;
+    align-items: stretch;
     gap: var(--space-sm);
     position: absolute;
-    top: calc(100% + 0.6rem);
+    top: calc(100% + 0.5rem);
     left: 0;
     right: 0;
     padding: var(--space-md) var(--space-lg);
@@ -120,5 +174,32 @@
     backdrop-filter: blur(18px) saturate(160%);
     -webkit-backdrop-filter: blur(18px) saturate(160%);
     box-shadow: var(--shadow-glass);
+    transform-origin: top center;
   }
+
+  .navbar__links.is-open a {
+    font-size: 1.05rem;
+  }
+
+  .navbar__cta {
+    display: none;
+  }
+
+  .navbar__mobile-divider {
+    display: block;
+    height: 1px;
+    background: var(--glass-border);
+    margin-block: var(--space-2xs);
+  }
+
+  .navbar__cta--mobile {
+    display: inline-flex;
+    justify-content: center;
+    width: 100%;
+  }
+}
+
+/* Body scroll lock while the mobile panel is open (class applied by JS). */
+body.nav-open {
+  overflow: hidden;
 }

@@ -32,16 +32,23 @@
 
 <nav class="navbar">
   <a href="index.html" class="navbar__logo"><img src="assets/images/logos/dippy-studios-lockup.png" alt="Dippy Studios" height="28" class="navbar__logo-img" data-light-src="assets/images/logos/dippy-studios-lockup.png" data-dark-src="assets/images/logos/dippy-studios-lockup-white.png"></a>
-  <div class="navbar__links">
+  <div class="navbar__links" id="primary-nav">
     <a href="index.html">Home</a>
     <a href="about.html">About</a>
     <a href="services.html">Services</a>
     <a href="work.html" aria-current="page">Work</a>
     <a href="creators.html">Creators</a>
     <a href="insights.html">Insights</a>
+  
+    <div class="navbar__mobile-divider" aria-hidden="true"></div>
+    <a href="contact.html" class="btn btn--primary btn--sm navbar__cta--mobile">Start a project</a>
   </div>
   <a href="contact.html" class="btn btn--primary btn--sm navbar__cta magnetic">Start a project</a>
-  <button class="navbar__toggle" aria-label="Toggle menu" aria-expanded="false">☰</button>
+  <button class="navbar__toggle" aria-label="Toggle menu" aria-expanded="false" aria-controls="primary-nav">
+    <span class="navbar__toggle-line"></span>
+    <span class="navbar__toggle-line"></span>
+    <span class="navbar__toggle-line"></span>
+  </button>
 </nav>
 
 <main>
