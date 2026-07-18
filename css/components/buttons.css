@@ -8,10 +8,55 @@
   font-size: var(--fs-small);
   font-weight: 600;
   white-space: nowrap;
-  transition: transform var(--dur-fast) var(--ease-out-quad), box-shadow var(--dur-fast) var(--ease-out-quad), background var(--dur-fast) var(--ease-out-quad);
+  transition: transform var(--dur-fast) var(--ease-out-quad), box-shadow var(--dur-fast) var(--ease-out-quad), background var(--dur-fast) var(--ease-out-quad), filter var(--dur-fast) var(--ease-out-quad);
 }
 
-.btn:hover { transform: translateY(-2px); }
+.btn:hover { transform: translateY(-2px) scale(1.015); filter: brightness(1.04); }
+
+.btn:active { transform: translateY(0) scale(0.97); filter: brightness(0.98); }
+
+.btn:focus-visible {
+  outline: 2px solid var(--color-orange);
+  outline-offset: 2px;
+}
+
+.btn:disabled,
+.btn[aria-disabled="true"] {
+  opacity: 0.6;
+  cursor: not-allowed;
+  transform: none !important;
+}
+
+.btn--loading {
+  position: relative;
+  color: transparent !important;
+  pointer-events: none;
+}
+
+.btn--loading::after {
+  content: '';
+  position: absolute;
+  width: 1.1em;
+  height: 1.1em;
+  border-radius: 50%;
+  border: 2px solid currentColor;
+  border-top-color: transparent;
+  color: inherit;
+  animation: btn-spin 0.7s linear infinite;
+}
+
+.btn--primary.btn--loading::after,
+.btn--ghost.btn--loading::after { color: var(--color-white); }
+
+.btn--ghost.btn--loading::after { color: var(--color-dark); }
+
+@keyframes btn-spin {
+  to { transform: rotate(360deg); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .btn, .btn:hover, .btn:active { transition: none; transform: none; }
+}
 
 .btn--primary {
   background: var(--color-dark);
