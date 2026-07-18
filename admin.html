@@ -20,7 +20,7 @@
   <header class="admin-header">
     <div>
       <span class="eyebrow">Internal only</span>
-      <h1>Creator applications</h1>
+      <h1>Site content</h1>
     </div>
     <button type="button" class="btn btn--ghost btn--sm" data-signout-btn hidden>Sign out</button>
   </header>
@@ -43,15 +43,51 @@
   </section>
 
   <section data-app-panel hidden>
-    <div class="admin-tabs">
-      <button type="button" class="admin-tab is-active" data-tab="pending">Pending</button>
-      <button type="button" class="admin-tab" data-tab="approved">Approved</button>
-      <button type="button" class="admin-tab" data-tab="rejected">Rejected</button>
-      <button type="button" class="btn btn--ghost btn--sm" data-import-seed-btn style="margin-left:auto;">Import the 4 starter creators</button>
+    <div class="admin-section-tabs">
+      <button type="button" class="admin-section-tab is-active" data-section="applications">Creator Applications</button>
+      <button type="button" class="admin-section-tab" data-section="brands">Brands</button>
+      <button type="button" class="admin-section-tab" data-section="campaigns">Featured Work</button>
+      <button type="button" class="admin-section-tab" data-section="testimonials">Client Voices</button>
     </div>
 
-    <div class="form-status" data-list-status role="status" aria-live="polite" hidden></div>
-    <div class="admin-grid" data-applications-grid></div>
+    <div data-section-panel="applications">
+      <div class="admin-tabs">
+        <button type="button" class="admin-tab is-active" data-tab="pending">Pending</button>
+        <button type="button" class="admin-tab" data-tab="approved">Approved</button>
+        <button type="button" class="admin-tab" data-tab="rejected">Rejected</button>
+        <button type="button" class="btn btn--ghost btn--sm" data-import-seed-btn style="margin-left:auto;">Import the 4 starter creators</button>
+      </div>
+
+      <div class="form-status" data-list-status role="status" aria-live="polite" hidden></div>
+      <div class="admin-grid" data-applications-grid></div>
+    </div>
+
+    <div data-section-panel="brands" hidden>
+      <div class="admin-tabs">
+        <button type="button" class="btn btn--primary btn--sm" data-content-add="brands">+ Add brand</button>
+        <button type="button" class="btn btn--ghost btn--sm" data-content-import="brands" style="margin-left:auto;">Import existing brands</button>
+      </div>
+      <div class="form-status" data-content-status="brands" role="status" aria-live="polite" hidden></div>
+      <div class="admin-grid" data-content-grid="brands"></div>
+    </div>
+
+    <div data-section-panel="campaigns" hidden>
+      <div class="admin-tabs">
+        <button type="button" class="btn btn--primary btn--sm" data-content-add="campaigns">+ Add campaign</button>
+        <button type="button" class="btn btn--ghost btn--sm" data-content-import="campaigns" style="margin-left:auto;">Import existing campaigns</button>
+      </div>
+      <div class="form-status" data-content-status="campaigns" role="status" aria-live="polite" hidden></div>
+      <div class="admin-grid" data-content-grid="campaigns"></div>
+    </div>
+
+    <div data-section-panel="testimonials" hidden>
+      <div class="admin-tabs">
+        <button type="button" class="btn btn--primary btn--sm" data-content-add="testimonials">+ Add testimonial</button>
+        <button type="button" class="btn btn--ghost btn--sm" data-content-import="testimonials" style="margin-left:auto;">Import existing testimonials</button>
+      </div>
+      <div class="form-status" data-content-status="testimonials" role="status" aria-live="polite" hidden></div>
+      <div class="admin-grid" data-content-grid="testimonials"></div>
+    </div>
   </section>
 </div>
 

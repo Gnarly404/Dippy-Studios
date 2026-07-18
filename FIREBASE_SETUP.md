@@ -66,6 +66,21 @@ for real.
 - Approved creators appear on `creators.html` automatically on the next page load.
 - **Keep the `admin.html` link private** — it's not linked from anywhere on the public site, but it isn't hidden by a server-side login wall either, just the Firebase sign-in screen. Don't share the URL publicly.
 
+## 7. Managing Brands, Featured Work, and Client Voices
+
+`admin.html` also has tabs for the homepage's **Brands**, **Featured Work** (campaigns),
+and **Client Voices** (testimonials) sections. Each works the same way:
+
+- **+ Add** opens a blank card to fill in and save.
+- **Edit** on any existing card lets you change its fields or swap its image.
+- **Delete** removes it.
+- **Import existing…** copies whatever's currently in the matching `data/*.json`
+  file into Firestore once, so those become editable too (safe to click more
+  than once — already-imported entries are skipped).
+
+Once something is imported or added directly, it's served from Firestore instead
+of the static JSON, so there's no duplicate on the live site.
+
 ## Notes & limits
 
 - **No billing card required.** Photos are stored as compressed base64 image data directly on the Firestore document (resized client-side to ~900px JPEG) rather than in Firebase Cloud Storage — Google now requires the paid "Blaze" plan for *any* Cloud Storage bucket, even tiny ones, so this avoids that entirely.

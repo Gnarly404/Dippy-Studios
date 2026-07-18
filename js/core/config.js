@@ -16,6 +16,11 @@ export const FIREBASE_CONFIG = {
 // Firestore collection that holds creator applications.
 export const CREATORS_COLLECTION = 'creators';
 
+// Firestore collections for admin-managed homepage content.
+export const BRANDS_COLLECTION = 'brands';
+export const CAMPAIGNS_COLLECTION = 'campaigns';
+export const TESTIMONIALS_COLLECTION = 'testimonials';
+
 // ---------------------------------------------------------------------------
 // EmailJS config (sends the "new submission" / "new inquiry" notification
 // emails to Dippy Studios directly from the browser — no server needed)
