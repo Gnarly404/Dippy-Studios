@@ -25,15 +25,15 @@ export function initNavigation() {
 }
 
 // ---------------------------------------------------------------------------
-// Mobile menu: burger <-> X, floating panel entrance/exit, and all the
-// interaction details a premium mobile nav needs (scroll lock, outside
-// click, Escape, link click, resize, focus return).
+// Mobile menu: burger <-> X, left-docked drawer slide-in/out (handled by a
+// CSS transform transition on .is-open, not GSAP -- keeps this in sync with
+// the page-push effect, which is also pure CSS), plus all the interaction
+// details a premium mobile nav needs (scroll lock, outside click, Escape,
+// link click, resize, focus return).
 // ---------------------------------------------------------------------------
 function initMobileMenu(toggle, links) {
   let isOpen = false;
   let lastFocused = null;
-  const reduced = prefersReducedMotion();
-  const gsap = window.gsap;
 
   function open() {
     isOpen = true;
@@ -42,14 +42,6 @@ function initMobileMenu(toggle, links) {
     toggle.classList.add('is-active');
     toggle.setAttribute('aria-expanded', 'true');
     document.body.classList.add('nav-open');
-
-    if (gsap && !reduced) {
-      gsap.fromTo(
-        links,
-        { opacity: 0, y: -14, scale: 0.96 },
-        { opacity: 1, y: 0, scale: 1, duration: 0.4, ease: 'power3.out' }
-      );
-    }
   }
 
   function close({ restoreFocus = true } = {}) {
@@ -58,17 +50,12 @@ function initMobileMenu(toggle, links) {
     toggle.classList.remove('is-active');
     toggle.setAttribute('aria-expanded', 'false');
     document.body.classList.remove('nav-open');
+    links.classList.remove('is-open');
 
-    const finish = () => {
-      links.classList.remove('is-open');
-      links.removeAttribute('style');
-      if (restoreFocus) (lastFocused || toggle).focus();
-    };
-
-    if (gsap && !reduced) {
-      gsap.to(links, { opacity: 0, y: -10, scale: 0.97, duration: 0.25, ease: 'power2.in', onComplete: finish });
-    } else {
-      finish();
+    if (restoreFocus) {
+      // Wait for the slide-out transition so focus doesn't jump while the
+      // drawer is still visibly animating away.
+      window.setTimeout(() => (lastFocused || toggle).focus(), 450);
     }
   }
 
