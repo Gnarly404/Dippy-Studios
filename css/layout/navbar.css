@@ -109,6 +109,11 @@
 
 .navbar__links .navbar__cta--mobile { display: none; }
 
+.navbar__links .navbar__cta--mobile,
+.navbar__links .navbar__cta--mobile:hover {
+  color: var(--color-bg);
+}
+
 .navbar__mobile-divider { display: none; }
 
 .navbar__toggle {
@@ -168,12 +173,12 @@
     left: 0;
     right: 0;
     padding: var(--space-md) var(--space-lg);
-    background: var(--glass-fill);
+    background: rgba(255, 255, 255, 0.92);
     border: 1px solid var(--glass-border);
     border-radius: var(--radius-md);
     backdrop-filter: blur(18px) saturate(160%);
     -webkit-backdrop-filter: blur(18px) saturate(160%);
-    box-shadow: var(--shadow-glass);
+    box-shadow: 0 16px 40px rgba(23, 43, 54, 0.22);
     transform-origin: top center;
   }
 
