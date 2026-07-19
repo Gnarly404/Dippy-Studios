@@ -92,6 +92,16 @@ export function initCreatorApplySection() {
     if (!isFirebaseConfigured()) return;
 
     const data = new FormData(form);
+
+    // Honeypot: a field hidden from real visitors via CSS. Bots that fill
+    // in every input tend to fill this too. Pretend to succeed so a bot
+    // doesn't learn to look for a real error message instead.
+    if ((data.get('company_website') || '').toString().trim()) {
+      form.reset();
+      setStatus(statusEl, 'Application received \u2014 thank you!', 'success');
+      return;
+    }
+
     const name = (data.get('name') || '').toString().trim();
     const email = (data.get('email') || '').toString().trim();
     const bio = (data.get('bio') || '').toString().trim();

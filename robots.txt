@@ -1,0 +1,5 @@
+User-agent: *
+Allow: /
+Disallow: /admin.html
+
+Sitemap: https://gnarly404.github.io/Dippy-Studios/sitemap.xml

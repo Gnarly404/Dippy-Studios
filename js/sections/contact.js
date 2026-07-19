@@ -38,6 +38,14 @@ export function initContactSection() {
     if (!isEmailConfigured()) return;
 
     const data = new FormData(form);
+
+    // Honeypot: see creatorApply.js for the same technique/reasoning.
+    if ((data.get('company_website') || '').toString().trim()) {
+      form.reset();
+      setStatus(statusEl, 'Message sent \u2014 we\u2019ll be in touch soon.', 'success');
+      return;
+    }
+
     const name = (data.get('name') || '').toString().trim();
     const email = (data.get('email') || '').toString().trim();
     const message = (data.get('message') || '').toString().trim();
