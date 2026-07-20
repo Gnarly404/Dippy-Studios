@@ -7,6 +7,7 @@ import {
   EMAILJS_SERVICE_ID,
   EMAILJS_CREATOR_TEMPLATE_ID,
   EMAILJS_CONTACT_TEMPLATE_ID,
+  EMAILJS_TESTIMONIAL_TEMPLATE_ID,
   NOTIFY_EMAIL,
 } from './config.js';
 
@@ -57,4 +58,8 @@ export function sendCreatorApplicationEmail(fields) {
 
 export function sendContactInquiryEmail(fields) {
   return send(EMAILJS_CONTACT_TEMPLATE_ID, fields);
+}
+
+export function sendTestimonialSubmissionEmail(fields) {
+  return send(EMAILJS_TESTIMONIAL_TEMPLATE_ID, fields);
 }

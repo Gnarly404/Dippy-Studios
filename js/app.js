@@ -24,6 +24,7 @@ import { initTestimonialsSection } from './sections/testimonials.js';
 import { initPortfolioSection } from './sections/portfolio.js';
 import { initContactSection } from './sections/contact.js';
 import { initCreatorApplySection } from './sections/creatorApply.js';
+import { initTestimonialSubmitSection } from './sections/testimonialSubmit.js';
 import { initFooterSection } from './sections/footer.js';
 
 async function main() {
@@ -43,6 +44,7 @@ async function main() {
   initHeroSection();
   initContactSection();
   initCreatorApplySection();
+  initTestimonialSubmitSection();
   initFooterSection();
   initRibbons();
   setupScrollTrigger();

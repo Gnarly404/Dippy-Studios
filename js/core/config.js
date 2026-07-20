@@ -31,6 +31,7 @@ export const EMAILJS_PUBLIC_KEY = 'Oo4izfPiCQW53Zawe';
 export const EMAILJS_SERVICE_ID = 'service_h54p865';
 export const EMAILJS_CREATOR_TEMPLATE_ID = 'template_6591ona'; // new creator application
 export const EMAILJS_CONTACT_TEMPLATE_ID = 'template_9k6314b'; // contact form inquiry
+export const EMAILJS_TESTIMONIAL_TEMPLATE_ID = 'REPLACE_ME'; // new client testimonial submitted for review
 
 // Email address that should receive notifications (used as a template
 // variable — set the "To email" in each EmailJS template to this same

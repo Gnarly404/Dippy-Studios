@@ -1,5 +1,5 @@
 import { fetchJSON, qs, qsa } from '../core/utilities.js';
-import { getDb, collection, getDocs, isFirebaseConfigured } from '../core/firebaseClient.js';
+import { getDb, collection, getDocs, query, where, isFirebaseConfigured } from '../core/firebaseClient.js';
 import { TESTIMONIALS_COLLECTION } from '../core/config.js';
 
 const FALLBACK = [
@@ -26,7 +26,8 @@ const FALLBACK = [
 async function fetchFromFirestore() {
   if (!isFirebaseConfigured()) return [];
   try {
-    const snap = await getDocs(collection(getDb(), TESTIMONIALS_COLLECTION));
+    const q = query(collection(getDb(), TESTIMONIALS_COLLECTION), where('status', '==', 'approved'));
+    const snap = await getDocs(q);
     return snap.docs.map((d) => d.data());
   } catch (err) {
     console.error('Could not load testimonials from Firestore:', err);

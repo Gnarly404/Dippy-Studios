@@ -379,6 +379,7 @@ const CONTENT_TYPES = {
     seedFile: 'data/testimonials.json',
     imageField: 'avatar',
     dedupeKey: 'name',
+    hasApproval: true,
     fields: [
       { key: 'name', label: 'Name', type: 'text' },
       { key: 'role', label: 'Role / company', type: 'text' },
@@ -389,6 +390,7 @@ const CONTENT_TYPES = {
       role: c.role,
       quote: c.quote,
       avatar: c.avatar,
+      status: 'approved',
     }),
   },
 };
@@ -401,14 +403,17 @@ function renderContentViewCard(type, id, c) {
   const fieldsHtml = cfg.fields
     .map((f) => `<p class="mono-label">${escapeHtml(f.label)}: ${escapeHtml(c[f.key])}</p>`)
     .join('');
+  const isPending = cfg.hasApproval && c.status === 'pending';
 
   return `
   <article class="admin-card admin-application" data-id="${id}" data-content-type="${type}">
     <img src="${escapeHtml(c[cfg.imageField])}" alt="${escapeHtml(c.name || c.title || '')}" class="admin-application__photo">
     <div class="admin-application__body">
+      ${isPending ? '<p class="mono-label" data-tone="warn" style="color:#6a5200;">Pending review</p>' : ''}
       ${fieldsHtml}
     </div>
     <div class="admin-application__actions">
+      ${isPending ? '<button type="button" class="btn btn--primary btn--sm" data-content-action="approve">Approve</button>' : ''}
       <button type="button" class="btn btn--ghost btn--sm" data-content-action="edit">Edit</button>
       <button type="button" class="btn btn--ghost btn--sm" data-content-action="delete">Delete</button>
     </div>
@@ -458,8 +463,20 @@ async function loadContentList(type) {
       return;
     }
     setStatus(statusEl, '', '');
-    snap.docs.forEach((d) => contentDocs[type].set(d.id, d.data()));
-    grid.innerHTML = snap.docs.map((d) => renderContentViewCard(type, d.id, d.data())).join('');
+
+    const docs = snap.docs.map((d) => ({ id: d.id, data: d.data() }));
+
+    if (cfg.hasApproval) {
+      for (const { id, data } of docs) {
+        if (!data.status) {
+          data.status = 'approved';
+          updateDoc(doc(getDb(), cfg.collection, id), { status: 'approved' }).catch(() => {});
+        }
+      }
+    }
+
+    docs.forEach(({ id, data }) => contentDocs[type].set(id, data));
+    grid.innerHTML = docs.map(({ id, data }) => renderContentViewCard(type, id, data)).join('');
   } catch (err) {
     setStatus(statusEl, `Couldn\u2019t load: ${err.message}`, 'error');
   }
@@ -497,6 +514,7 @@ function switchContentToEdit(type, card, id) {
       updates[input.dataset.editContentField] = input.value.trim();
     });
     if (newImageDataURL) updates[cfg.imageField] = newImageDataURL;
+    if (cfg.hasApproval && id.startsWith('__new__') && !c.status) updates.status = 'approved';
 
     try {
       if (id.startsWith('__new__')) {
@@ -556,6 +574,19 @@ function bindContentGridActions(type) {
         await deleteDoc(doc(getDb(), CONTENT_TYPES[type].collection, id));
         contentDocs[type].delete(id);
         card.remove();
+      } catch (err) {
+        alert(`That didn\u2019t work: ${err.message}`);
+        btn.disabled = false;
+      }
+    }
+
+    if (action === 'approve') {
+      btn.disabled = true;
+      try {
+        await updateDoc(doc(getDb(), CONTENT_TYPES[type].collection, id), { status: 'approved' });
+        const merged = { ...contentDocs[type].get(id), status: 'approved' };
+        contentDocs[type].set(id, merged);
+        card.outerHTML = renderContentViewCard(type, id, merged);
       } catch (err) {
         alert(`That didn\u2019t work: ${err.message}`);
         btn.disabled = false;
