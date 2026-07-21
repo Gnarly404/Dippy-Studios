@@ -3,6 +3,10 @@
 // rest of this static site.
 import { initializeApp } from 'https://www.gstatic.com/firebasejs/12.16.0/firebase-app.js';
 import {
+  getAnalytics,
+  isSupported as isAnalyticsSupported,
+} from 'https://www.gstatic.com/firebasejs/12.16.0/firebase-analytics.js';
+import {
   getFirestore,
   collection,
   addDoc,
@@ -37,6 +41,16 @@ function ensureInit() {
     // ever looks for a database literally named "(default)".
     db = getFirestore(app, 'dippy-studios');
     auth = getAuth(app);
+
+    // Analytics: skip on admin.html (the owner's own visits shouldn't
+    // count as site traffic) and skip gracefully if the browser doesn't
+    // support it (e.g. some private-browsing modes).
+    const isAdminPage = /(^|\/)admin\.html$/.test(location.pathname);
+    if (!isAdminPage) {
+      isAnalyticsSupported()
+        .then((supported) => { if (supported) getAnalytics(app); })
+        .catch(() => {});
+    }
   }
   return { app, db, auth };
 }

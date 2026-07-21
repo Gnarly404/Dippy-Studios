@@ -190,7 +190,7 @@ export function initCreatorApplySection() {
     } catch (err) {
       setStatus(
         statusEl,
-        `We couldn\u2019t submit your application (${err.message}). Please try again in a moment, or email workwithgnarly@gmail.com directly.`,
+        `We couldn\u2019t submit your application (${err.message}). Please try again in a moment, or email tonymuthai@gmail.com or call +254 757 310 308.`,
         'error'
       );
     } finally {

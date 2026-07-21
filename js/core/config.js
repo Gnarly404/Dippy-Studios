@@ -11,6 +11,7 @@ export const FIREBASE_CONFIG = {
   storageBucket: 'dippy-studios.firebasestorage.app',
   messagingSenderId: '612995823560',
   appId: '1:612995823560:web:673293d336ab3f70e7f2fd',
+  measurementId: 'G-DTQ0SNK6RW',
 };
 
 // Firestore collection that holds creator applications.
