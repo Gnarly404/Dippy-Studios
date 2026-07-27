@@ -27,6 +27,8 @@ body {
   line-height: var(--lh-body);
   color: var(--color-dark);
   background: var(--color-bg);
+  overflow-wrap: break-word;
+  word-break: break-word;
 }
 
 h1, h2, h3, h4,
