@@ -57,6 +57,7 @@ function renderViewCard(id, c) {
     <div class="admin-application__actions">
       ${currentTab !== 'approved' ? '<button type="button" class="btn btn--primary btn--sm" data-action="approved">Approve</button>' : ''}
       ${currentTab !== 'rejected' ? '<button type="button" class="btn btn--ghost btn--sm" data-action="rejected">Reject</button>' : ''}
+      ${currentTab === 'rejected' ? '<button type="button" class="btn btn--ghost btn--sm" data-action="pending">Restore to pending</button>' : ''}
       <button type="button" class="btn btn--ghost btn--sm" data-action="edit">Edit</button>
       <button type="button" class="btn btn--ghost btn--sm" data-action="delete">Delete</button>
     </div>
