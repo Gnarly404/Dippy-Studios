@@ -15,6 +15,8 @@ import {
   signInWithEmailAndPassword,
   onAuthStateChanged,
   signOut,
+  setPersistence,
+  browserSessionPersistence,
 } from './core/firebaseClient.js';
 import { CREATORS_COLLECTION, BRANDS_COLLECTION, CAMPAIGNS_COLLECTION, TESTIMONIALS_COLLECTION } from './core/config.js';
 import { withTimeout, resizeImageToDataURL } from './core/imageUtils.js';
@@ -322,6 +324,10 @@ function initAuth() {
 
     setStatus(loginStatus, 'Signing in…', 'info');
     try {
+      // Session-only: this login only stays valid for the current browser
+      // session (closing the browser/tab clears it), rather than Firebase's
+      // default of staying signed in indefinitely across restarts.
+      await setPersistence(auth, browserSessionPersistence);
       await signInWithEmailAndPassword(auth, email, password);
     } catch (err) {
       setStatus(loginStatus, `Couldn\u2019t sign in: ${err.message}`, 'error');
@@ -398,23 +404,35 @@ const CONTENT_TYPES = {
 
 const contentDocs = { brands: new Map(), campaigns: new Map(), testimonials: new Map() };
 const contentLoaded = { brands: false, campaigns: false, testimonials: false };
+// Only content types with cfg.hasApproval use this (currently just
+// testimonials) -- which status the Pending/Approved/Rejected sub-tabs
+// are currently showing.
+const contentSubTab = { testimonials: 'pending' };
 
 function renderContentViewCard(type, id, c) {
   const cfg = CONTENT_TYPES[type];
   const fieldsHtml = cfg.fields
     .map((f) => `<p class="mono-label">${escapeHtml(f.label)}: ${escapeHtml(c[f.key])}</p>`)
     .join('');
-  const isPending = cfg.hasApproval && c.status === 'pending';
+
+  let statusActionsHtml = '';
+  if (cfg.hasApproval) {
+    const tab = contentSubTab[type];
+    statusActionsHtml = `
+      ${tab !== 'approved' ? '<button type="button" class="btn btn--primary btn--sm" data-content-action="approved">Approve</button>' : ''}
+      ${tab !== 'rejected' ? '<button type="button" class="btn btn--ghost btn--sm" data-content-action="rejected">Reject</button>' : ''}
+      ${tab === 'rejected' ? '<button type="button" class="btn btn--ghost btn--sm" data-content-action="pending">Restore to pending</button>' : ''}
+    `;
+  }
 
   return `
   <article class="admin-card admin-application" data-id="${id}" data-content-type="${type}">
     <img src="${escapeHtml(c[cfg.imageField])}" alt="${escapeHtml(c.name || c.title || '')}" class="admin-application__photo">
     <div class="admin-application__body">
-      ${isPending ? '<p class="mono-label" data-tone="warn" style="color:#6a5200;">Pending review</p>' : ''}
       ${fieldsHtml}
     </div>
     <div class="admin-application__actions">
-      ${isPending ? '<button type="button" class="btn btn--primary btn--sm" data-content-action="approve">Approve</button>' : ''}
+      ${statusActionsHtml}
       <button type="button" class="btn btn--ghost btn--sm" data-content-action="edit">Edit</button>
       <button type="button" class="btn btn--ghost btn--sm" data-content-action="delete">Delete</button>
     </div>
@@ -458,24 +476,23 @@ async function loadContentList(type) {
   contentDocs[type] = new Map();
 
   try {
-    const snap = await getDocs(collection(getDb(), cfg.collection));
+    const snap = cfg.hasApproval
+      ? await getDocs(query(collection(getDb(), cfg.collection), where('status', '==', contentSubTab[type])))
+      : await getDocs(collection(getDb(), cfg.collection));
+
     if (snap.empty) {
-      setStatus(statusEl, 'Nothing here yet — add one, or import the existing entries.', 'info');
+      setStatus(
+        statusEl,
+        cfg.hasApproval
+          ? `No ${contentSubTab[type]} entries right now.`
+          : 'Nothing here yet — add one, or import the existing entries.',
+        'info'
+      );
       return;
     }
     setStatus(statusEl, '', '');
 
     const docs = snap.docs.map((d) => ({ id: d.id, data: d.data() }));
-
-    if (cfg.hasApproval) {
-      for (const { id, data } of docs) {
-        if (!data.status) {
-          data.status = 'approved';
-          updateDoc(doc(getDb(), cfg.collection, id), { status: 'approved' }).catch(() => {});
-        }
-      }
-    }
-
     docs.forEach(({ id, data }) => contentDocs[type].set(id, data));
     grid.innerHTML = docs.map(({ id, data }) => renderContentViewCard(type, id, data)).join('');
   } catch (err) {
@@ -579,15 +596,18 @@ function bindContentGridActions(type) {
         alert(`That didn\u2019t work: ${err.message}`);
         btn.disabled = false;
       }
+      return;
     }
 
-    if (action === 'approve') {
+    if (action === 'approved' || action === 'rejected' || action === 'pending') {
       btn.disabled = true;
       try {
-        await updateDoc(doc(getDb(), CONTENT_TYPES[type].collection, id), { status: 'approved' });
-        const merged = { ...contentDocs[type].get(id), status: 'approved' };
-        contentDocs[type].set(id, merged);
-        card.outerHTML = renderContentViewCard(type, id, merged);
+        await updateDoc(doc(getDb(), CONTENT_TYPES[type].collection, id), { status: action });
+        // The card no longer belongs in the currently-viewed sub-tab once
+        // its status changes, so just remove it from view rather than
+        // re-render it in place.
+        contentDocs[type].delete(id);
+        card.remove();
       } catch (err) {
         alert(`That didn\u2019t work: ${err.message}`);
         btn.disabled = false;
@@ -640,9 +660,21 @@ async function importContentSeed(type) {
   }
 }
 
+function bindContentSubTabs(type) {
+  qsa(`[data-content-tab="${type}"]`).forEach((tab) => {
+    tab.addEventListener('click', () => {
+      qsa(`[data-content-tab="${type}"]`).forEach((t) => t.classList.remove('is-active'));
+      tab.classList.add('is-active');
+      contentSubTab[type] = tab.dataset.contentTabValue;
+      loadContentList(type);
+    });
+  });
+}
+
 function initContentManagers() {
   Object.keys(CONTENT_TYPES).forEach((type) => {
     bindContentGridActions(type);
+    bindContentSubTabs(type);
     qs(`[data-content-add="${type}"]`).addEventListener('click', () => addNewContentItem(type));
     qs(`[data-content-import="${type}"]`).addEventListener('click', () => importContentSeed(type));
   });

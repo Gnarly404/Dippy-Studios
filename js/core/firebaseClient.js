@@ -24,6 +24,8 @@ import {
   signInWithEmailAndPassword,
   onAuthStateChanged,
   signOut,
+  setPersistence,
+  browserSessionPersistence,
 } from 'https://www.gstatic.com/firebasejs/12.16.0/firebase-auth.js';
 
 import { FIREBASE_CONFIG } from './config.js';
@@ -81,4 +83,6 @@ export {
   signInWithEmailAndPassword,
   onAuthStateChanged,
   signOut,
+  setPersistence,
+  browserSessionPersistence,
 };
